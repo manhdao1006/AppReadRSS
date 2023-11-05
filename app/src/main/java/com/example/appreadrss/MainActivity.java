@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
 
     ListView lvTieuDe;
     ArrayList<String> arrTitle, arrLink;
-    ArrayAdapter<String> adapter;
+    ArrayAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,10 +41,10 @@ public class MainActivity extends AppCompatActivity {
         arrTitle = new ArrayList<>();
         arrLink = new ArrayList<>();
 
-        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, arrTitle);
+        adapter = new ArrayAdapter<>(this, R.layout.layout_listview, arrTitle);
         lvTieuDe.setAdapter(adapter);
 
-        new ReadRSS().execute("https://thanhnien.vn/rss/the-thao/bong-da-quoc-te.rss");
+        new ReadRSS().execute("https://vnexpress.net/rss/the-thao.rss");
 
         lvTieuDe.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -95,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
 
             for(int i = 0; i < nodeList.getLength(); i++){
                 Element element = (Element) nodeList.item(i);
-                tieuDe += parser.getValue(element, "title");
+                tieuDe = parser.getValue(element, "title");
                 arrTitle.add(tieuDe);
                 arrLink.add(parser.getValue(element, "link"));
             }
